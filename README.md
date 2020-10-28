@@ -22,6 +22,15 @@ or add
 to the `require` section of your `composer.json` file.
 
 
+Then run db migrations, to create needed tables:
+
+```
+php yii migrate --migrationPath=@andrewdanilov/sitedata/migrations
+```
+
+Do not forget to run migrations after extension updates too.
+
+
 Usage
 -----
 
