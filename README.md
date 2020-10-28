@@ -56,8 +56,8 @@ $config = [
 Backend links to manage values and categories:
 
 ```php
-$valuesMangerUrl = Yii::$app->urlManager->createUrl(['/sitedata/values']);
-$categoriesMangerUrl = Yii::$app->urlManager->createUrl(['/sitedata/categories']);
+$valuesMangerUrl = Yii::$app->urlManager->createUrl(['/sitedata/data']);
+$categoriesMangerUrl = Yii::$app->urlManager->createUrl(['/sitedata/category']);
 ```
 
 To display needed value in your view, for example, use:
