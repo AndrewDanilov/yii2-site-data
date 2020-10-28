@@ -43,7 +43,7 @@ $config = [
 	// ...
 	'modules' => [
 		// ...
-		'siteData' => [
+		'sitedata' => [
 			'class' => 'andrewdanilov\sitedata\Module',
 			'componentName' => 'siteData', // optional, default is 'siteData'
 			'user' => 'user', // optional, default is 'user'
@@ -53,10 +53,17 @@ $config = [
 ];
 ```
 
-Display needed value in your view, for example:
+Backend links to manage values and categories:
+
+```php
+$valuesMangerUrl = Yii::$app->urlManager->createUrl(['/sitedata/values']);
+$categoriesMangerUrl = Yii::$app->urlManager->createUrl(['/sitedata/categories']);
+```
+
+To display needed value in your view, for example, use:
 
 ```php
 $this->title = Yii::$app->siteData->get('seo_title', 'Default seo title');
 ```
 
-Where `siteData` is a component name, setted in `componentName` property of siteData module.
+where `siteData` is a component name, setted in `componentName` property of `sitedata` module.

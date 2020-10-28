@@ -13,9 +13,9 @@ class Module extends \yii\base\Module
 
 	public function init()
 	{
-		Yii::$app->components[$this->componentName] = [
+		Yii::$app->set($this->componentName, [
 			'class' => 'andrewdanilov\sitedata\SiteDataComponent',
-		];
+		]);
 		$this->controllerMap['values'] = [
 			'class' => 'andrewdanilov\sitedata\controllers\SiteDataController',
 			'user' => $this->user,
