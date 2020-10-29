@@ -3,12 +3,12 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
-use common\models\SiteSetting;
-use common\models\SiteSettingCategory;
 use yii\helpers\StringHelper;
+use andrewdanilov\sitedata\models\SiteData;
+use andrewdanilov\sitedata\models\SiteDataCategory;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\SiteSettingSearch */
+/* @var $searchModel andrewdanilov\sitedata\models\SiteDataSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Настройки сайта';
@@ -35,18 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
 	        [
 		        'attribute' => 'category_id',
 		        'value' => 'category.name',
-		        'filter' => SiteSettingCategory::find()->select(['name', 'id'])->indexBy('id')->column(),
+		        'filter' => SiteDataCategory::find()->select(['name', 'id'])->indexBy('id')->column(),
 	        ],
             'key',
             'name',
 	        [
 		        'attribute' => 'value',
 		        'format' => 'raw',
-		        'value' => function(SiteSetting $model) {
-			        if ($model->type == SiteSetting::VALUE_TYPE_BOOLEAN) {
+		        'value' => function(SiteData $model) {
+			        if ($model->type == SiteData::VALUE_TYPE_BOOLEAN) {
 				        return Yii::$app->formatter->asBoolean($model->value);
-			        } elseif ($model->type == SiteSetting::VALUE_TYPE_TEXT ||
-				        $model->type == SiteSetting::VALUE_TYPE_REACHTEXT) {
+			        } elseif ($model->type == SiteData::VALUE_TYPE_TEXT ||
+				        $model->type == SiteData::VALUE_TYPE_REACHTEXT) {
 				        $v = StringHelper::truncateWords($model->value, 20, '...');
 				        return preg_replace("/[\n\r]+/", "\n", $v);
 			        } else {
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	        ],
             [
             	'attribute' => 'type',
-	            'value' => function(SiteSetting $model) {
+	            'value' => function(SiteData $model) {
     	            return ArrayHelper::getValue($model::getTypeList(), $model->type);
 	            },
 	            'filter' => $searchModel::getTypeList(),
