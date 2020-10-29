@@ -13,8 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-setting-category-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Новый раздел настроек', ['update'], ['class' => 'btn btn-success']) ?>
     </p>
