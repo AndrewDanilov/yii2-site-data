@@ -18,24 +18,18 @@ if ($model->isNewRecord) {
 	$this->params['breadcrumbs'][] = $model->name;
 }
 ?>
-<div class="site-setting-category-update">
+<div class="site-data-category-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+	<?php $form = ActiveForm::begin(); ?>
 
-	<div class="site-data-category-form">
+	<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-		<?php $form = ActiveForm::begin(); ?>
+	<?= $form->field($model, 'order')->textInput() ?>
 
-		<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-		<?= $form->field($model, 'order')->textInput() ?>
-
-		<div class="form-group">
-			<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
-		</div>
-
-		<?php ActiveForm::end(); ?>
-
+	<div class="form-group">
+		<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 	</div>
+
+	<?php ActiveForm::end(); ?>
 
 </div>
