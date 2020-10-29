@@ -29,21 +29,24 @@ class ManagerController extends BackendController
     {
     	$category = SiteDataCategory::find()->where(['id' => $category_id])->one();
 
-	    $hasErrors = false;
-	    foreach ($category->data as $data) {
-		    $data->load(Yii::$app->request->post(), 'Data[' . $data->key . ']');
-		    $data->prepareValue();
-		    if (!$data->save()) {
-		    	$hasErrors = true;
+    	if (Yii::$app->request->isPost) {
+		    $hasErrors = false;
+		    foreach ($category->data as $data) {
+			    if ($data->load(Yii::$app->request->post(), 'Data[' . $data->key . ']')) {
+				    $data->prepareValue();
+				    if (!$data->save()) {
+					    $hasErrors = true;
+				    }
+			    }
 		    }
-    	}
 
-	    if (!$hasErrors) {
-	    	Yii::$app->session->setFlash('success');
-		    return $this->redirect(['edit', 'category_id' => $category_id]);
+		    if (!$hasErrors) {
+			    Yii::$app->session->setFlash('success');
+			    return $this->redirect(['edit', 'category_id' => $category_id]);
+		    }
 	    }
 
-	    return $this->render('update', [
+	    return $this->render('edit', [
 		    'category' => $category,
 	    ]);
     }

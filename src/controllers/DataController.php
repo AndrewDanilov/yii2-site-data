@@ -56,7 +56,7 @@ class DataController extends BackendController
     /**
      * Deletes an existing SiteData model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -70,7 +70,7 @@ class DataController extends BackendController
     /**
      * Finds the SiteData model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id
      * @return SiteData the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
