@@ -2,114 +2,49 @@
 namespace andrewdanilov\sitedata\controllers;
 
 use Yii;
-use yii\web\NotFoundHttpException;
-use andrewdanilov\sitedata\models\SiteData;
-use andrewdanilov\sitedata\models\SiteDataSearch;
+use andrewdanilov\sitedata\models\SiteDataCategory;
 
 /**
  * ManagerController
  */
 class ManagerController extends BackendController
 {
-    /**
-     * Lists all SiteData models.
-     * @return mixed
-     */
+	/**
+	 * @return mixed
+	 */
     public function actionIndex()
     {
-        $searchModel = new SiteDataSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    	$categories = SiteDataCategory::find()->orderBy(['order' => SORT_ASC])->all();
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+	    return $this->render('index', [
+		    'categories' => $categories,
+	    ]);
     }
 
-    /**
-     * Displays a single SiteData model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
+	/**
+	 * @param int $category_id
+	 * @return string|\yii\web\Response
+	 */
+    public function actionEdit($category_id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+    	$category = SiteDataCategory::find()->where(['id' => $category_id])->one();
 
-    /**
-     * Creates a new SiteData model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new SiteData();
+	    $hasErrors = false;
+	    foreach ($category->data as $data) {
+		    $data->load(Yii::$app->request->post(), 'Data[' . $data->key . ']');
+		    $data->prepareValue();
+		    if (!$data->save()) {
+		    	$hasErrors = true;
+		    }
+    	}
 
-        if ($model->load(Yii::$app->request->post())) {
-	        $model->prepareValue();
-        	if ($model->save()) {
-		        return $this->redirect(['index']);
-	        }
-        }
+	    if (!$hasErrors) {
+	    	Yii::$app->session->setFlash('success');
+		    return $this->redirect(['edit', 'category_id' => $category_id]);
+	    }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing SiteData model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post())) {
-	        $model->prepareValue();
-	        if ($model->save()) {
-		        return $this->redirect(['index']);
-	        }
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Deletes an existing SiteData model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the SiteData model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return SiteData the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = SiteData::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
+	    return $this->render('update', [
+		    'category' => $category,
+	    ]);
     }
 }

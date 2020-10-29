@@ -10,9 +10,12 @@ class Module extends \yii\base\Module
 	public $access = ['@'];
 	public $user = 'user';
 	public $componentName = 'siteData';
+	public $basePath = '@frontend/web';
+	public $uploadPath = 'upload';
 
 	public function init()
 	{
+		$this->uploadPath = rtrim($this->uploadPath, DIRECTORY_SEPARATOR);
 		Yii::$app->set($this->componentName, [
 			'class' => 'andrewdanilov\sitedata\SiteDataComponent',
 		]);
@@ -30,6 +33,18 @@ class Module extends \yii\base\Module
 			'class' => 'andrewdanilov\sitedata\controllers\CategoryController',
 			'user' => $this->user,
 			'access' => $this->access,
+		];
+		$this->controllerMap['elfinder'] = [
+			'class' => 'mihaildev\elfinder\Controller',
+			'access' => $this->access,
+			'roots' => [
+				[
+					'baseUrl' => '',
+					'basePath' => $this->basePath,
+					'path' => $this->uploadPath . '/sitedata',
+					'name' => 'SiteData Files',
+				],
+			],
 		];
 		parent::init();
 	}

@@ -27,37 +27,6 @@ class CategoryController extends BackendController
     }
 
     /**
-     * Displays a single SiteDataCategory model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new SiteDataCategory model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new SiteDataCategory();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
      * Updates an existing SiteDataCategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -66,7 +35,11 @@ class CategoryController extends BackendController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+	    if ($id) {
+		    $model = $this->findModel($id);
+	    } else {
+		    $model = new SiteDataCategory();
+	    }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);

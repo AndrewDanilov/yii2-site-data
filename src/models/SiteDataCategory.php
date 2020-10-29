@@ -7,7 +7,7 @@ namespace andrewdanilov\sitedata\models;
  * @property int $id
  * @property string $name
  * @property int $order
- * @property SiteData[] $settings
+ * @property SiteData[] $data
  */
 class SiteDataCategory extends \yii\db\ActiveRecord
 {
@@ -44,7 +44,7 @@ class SiteDataCategory extends \yii\db\ActiveRecord
         ];
     }
 
-	public function getSettings()
+	public function getData()
 	{
 		return $this->hasMany(SiteData::class, ['category_id' => 'id']);
 	}

@@ -14,13 +14,13 @@ use andrewdanilov\sitedata\models\SiteDataCategory;
 $this->title = 'Настройки сайта';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-setting-index">
+<div class="site-data-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Новый параметр', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Разделы настроек', ['site-setting-category/index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Новый параметр', ['update'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Разделы настроек', ['/sitedata/category'], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?= GridView::widget([

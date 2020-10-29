@@ -36,7 +36,7 @@ Usage
 
 _Extension is in testing. Do not use it!_
 
-Configure settings in your `common/config/main.php`:
+Configure settings in your `common` config:
 
 ```php
 $config = [
@@ -48,10 +48,15 @@ $config = [
 			'componentName' => 'siteData', // optional, default is 'siteData'
 			'user' => 'user', // optional, default is 'user'
 			'access' => ['admin'], // optional, default is ['@']
+            'basePath' => '@frontend/web', // optional, default is '@frontend/web'
+            'uploadPath' => 'upload', // optional, default is 'upload'
 		],
 	],
 ];
 ```
+
+Here `access` option allows restricting access to defined roles. Options `basePath` and `uploadPath` defines a path where the different type of images or files will be stored.
+
 
 Backend links to manage site data and categories:
 
@@ -59,7 +64,7 @@ Backend links to manage site data and categories:
 // list of links for managing values of each category all in one page
 $categoryListUrl = Yii::$app->urlManager->createUrl(['/sitedata/manager']);
 // manager of all values of category in one page
-$categoryDataManagerUrl = Yii::$app->urlManager->createUrl(['/sitedata/manager', 'category_id' => 123]);
+$categoryDataManagerUrl = Yii::$app->urlManager->createUrl(['/sitedata/manager/edit', 'category_id' => 123]);
 
 // grid for adding/editing/removing data items
 $dataGridUrl = Yii::$app->urlManager->createUrl(['/sitedata/data']);

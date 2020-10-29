@@ -27,49 +27,19 @@ class DataController extends BackendController
     }
 
     /**
-     * Displays a single SiteData model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new SiteData model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new SiteData();
-
-        if ($model->load(Yii::$app->request->post())) {
-	        $model->prepareValue();
-        	if ($model->save()) {
-		        return $this->redirect(['index']);
-	        }
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
      * Updates an existing SiteData model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id=null)
     {
-        $model = $this->findModel($id);
+    	if ($id) {
+	        $model = $this->findModel($id);
+	    } else {
+		    $model = new SiteData();
+	    }
 
         if ($model->load(Yii::$app->request->post())) {
 	        $model->prepareValue();
