@@ -29,11 +29,11 @@ class CategoryController extends BackendController
     /**
      * Updates an existing SiteDataCategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int|null $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id=null)
     {
 	    if ($id) {
 		    $model = $this->findModel($id);

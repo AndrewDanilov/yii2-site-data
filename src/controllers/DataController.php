@@ -29,7 +29,7 @@ class DataController extends BackendController
     /**
      * Updates an existing SiteData model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int|null $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
