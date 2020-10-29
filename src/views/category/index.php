@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Разделы настроек';
-$this->params['breadcrumbs'][] = ['label' => 'Настройки сайта', 'url' => ['site-setting/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Настройки сайта', 'url' => ['/sitedata/category']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-setting-category-index">

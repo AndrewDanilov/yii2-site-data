@@ -7,9 +7,9 @@ use andrewdanilov\sitedata\models\SiteDataCategory;
 use andrewdanilov\sitedata\models\SiteDataCategorySearch;
 
 /**
- * SiteDataCategoryController implements the CRUD actions for SiteDataCategory model.
+ * CategoryController implements the CRUD actions for SiteDataCategory model.
  */
-class SiteDataCategoryController extends BackendController
+class CategoryController extends BackendController
 {
     /**
      * Lists all SiteDataCategory models.

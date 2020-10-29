@@ -53,11 +53,18 @@ $config = [
 ];
 ```
 
-Backend links to manage values and categories:
+Backend links to manage site data and categories:
 
 ```php
-$valuesMangerUrl = Yii::$app->urlManager->createUrl(['/sitedata/data']);
-$categoriesMangerUrl = Yii::$app->urlManager->createUrl(['/sitedata/category']);
+// list of links for managing values of each category all in one page
+$categoryListUrl = Yii::$app->urlManager->createUrl(['/sitedata/manager']);
+// manager of all values of category in one page
+$categoryDataManagerUrl = Yii::$app->urlManager->createUrl(['/sitedata/manager', 'category_id' => 123]);
+
+// grid for adding/editing/removing data items
+$dataGridUrl = Yii::$app->urlManager->createUrl(['/sitedata/data']);
+// grid for adding/editing/removing data categories
+$categoryGridUrl = Yii::$app->urlManager->createUrl(['/sitedata/category']);
 ```
 
 To display needed value in your view, for example, use:
@@ -66,4 +73,5 @@ To display needed value in your view, for example, use:
 $this->title = Yii::$app->siteData->get('seo_title', 'Default seo title');
 ```
 
-where `siteData` is a component name, setted in `componentName` property of `sitedata` module.
+where `siteData` is a component name, configured in `componentName` property of `sitedata` module. Second param is optional
+and defines default value if key does not exist.

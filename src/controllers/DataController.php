@@ -7,9 +7,9 @@ use andrewdanilov\sitedata\models\SiteData;
 use andrewdanilov\sitedata\models\SiteDataSearch;
 
 /**
- * SiteDataController implements the CRUD actions for SiteData model.
+ * DataController implements the CRUD actions for SiteData model.
  */
-class SiteDataController extends BackendController
+class DataController extends BackendController
 {
     /**
      * Lists all SiteData models.

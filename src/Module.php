@@ -16,13 +16,18 @@ class Module extends \yii\base\Module
 		Yii::$app->set($this->componentName, [
 			'class' => 'andrewdanilov\sitedata\SiteDataComponent',
 		]);
+		$this->controllerMap['manager'] = [
+			'class' => 'andrewdanilov\sitedata\controllers\ManagerController',
+			'user' => $this->user,
+			'access' => $this->access,
+		];
 		$this->controllerMap['data'] = [
-			'class' => 'andrewdanilov\sitedata\controllers\SiteDataController',
+			'class' => 'andrewdanilov\sitedata\controllers\DataController',
 			'user' => $this->user,
 			'access' => $this->access,
 		];
 		$this->controllerMap['category'] = [
-			'class' => 'andrewdanilov\sitedata\controllers\SiteDataCategoryController',
+			'class' => 'andrewdanilov\sitedata\controllers\CategoryController',
 			'user' => $this->user,
 			'access' => $this->access,
 		];
