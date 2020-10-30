@@ -32,10 +32,10 @@ $this->params['breadcrumbs'][] = $category->name;
 				echo $form->field($data, 'value[' . $data->key . ']')->textarea(['rows' => 6])->label($data->name);
 				break;
 			case $data::VALUE_TYPE_BOOLEAN:
-				$form->field($data, 'value')->dropDownList(['0' => 'Нет', '1' => 'Да'])->label($data->name);
+				echo $form->field($data, 'value')->dropDownList(['0' => 'Нет', '1' => 'Да'])->label($data->name);
 				break;
 			case $data::VALUE_TYPE_FILE:
-				$form->field($data, 'value')->widget(InputFile::class, [
+				echo $form->field($data, 'value')->widget(InputFile::class, [
 					'language'      => 'ru',
 					'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
 					'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
@@ -45,10 +45,10 @@ $this->params['breadcrumbs'][] = $category->name;
 				])->label($data->name);
 				break;
 			case $data::VALUE_TYPE_IMAGE:
-				$form->field($data, 'value')->widget(InputImages::class)->label($data->name);
+				echo $form->field($data, 'value')->widget(InputImages::class)->label($data->name);
 				break;
 			default:
-				$form->field($data, 'value')->textInput(['maxlength' => true])->label($data->name);
+				echo $form->field($data, 'value')->textInput(['maxlength' => true])->label($data->name);
 		}
 		?>
 
