@@ -27,12 +27,14 @@ class ManagerController extends BackendController
 	 */
     public function actionEdit($category_id)
     {
+    	/* @var $category SiteDataCategory */
     	$category = SiteDataCategory::find()->where(['id' => $category_id])->one();
 
-    	if (Yii::$app->request->isPost) {
+        $post = Yii::$app->request->post();
+        if (isset($post['SiteData'])) {
 		    $hasErrors = false;
 		    foreach ($category->data as $data) {
-			    if ($data->load(Yii::$app->request->post(), 'SiteData[' . $data->key . ']')) {
+			    if ($data->load($post['SiteData'][$data->key], '')) {
 				    $data->prepareValue();
 				    if (!$data->save()) {
 					    $hasErrors = true;
