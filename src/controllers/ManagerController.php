@@ -32,7 +32,7 @@ class ManagerController extends BackendController
     	if (Yii::$app->request->isPost) {
 		    $hasErrors = false;
 		    foreach ($category->data as $data) {
-			    if ($data->load(Yii::$app->request->post(), 'Data[' . $data->key . ']')) {
+			    if ($data->load(Yii::$app->request->post(), 'SiteData[' . $data->key . ']')) {
 				    $data->prepareValue();
 				    if (!$data->save()) {
 					    $hasErrors = true;

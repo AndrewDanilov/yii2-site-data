@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $category->name;
 				])->label($data->name);
 				break;
 			case $data::VALUE_TYPE_TEXT:
-				echo $form->field($data, 'value')->textarea(['rows' => 6])->label($data->name);
+				echo $form->field($data, 'value[' . $data->key . ']')->textarea(['rows' => 6])->label($data->name);
 				break;
 			case $data::VALUE_TYPE_BOOLEAN:
 				$form->field($data, 'value')->dropDownList(['0' => 'Нет', '1' => 'Да'])->label($data->name);
