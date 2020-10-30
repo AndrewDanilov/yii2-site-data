@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-data-index">
 
     <p>
-        <?= Html::a('Новый параметр', ['update'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Новый параметр', ['/sitedata/data/update'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Разделы настроек', ['/sitedata/category'], ['class' => 'btn btn-warning']) ?>
     </p>
 
