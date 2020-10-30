@@ -7,6 +7,7 @@ use mihaildev\elfinder\InputFile;
 use andrewdanilov\InputImages\InputImages;
 use andrewdanilov\ckeditor\CKEditor;
 use andrewdanilov\helpers\CKEditorHelper;
+use andrewdanilov\sitedata\models\SiteData;
 
 /* @var $this yii\web\View */
 /* @var $category andrewdanilov\sitedata\models\SiteDataCategory */
@@ -23,19 +24,19 @@ $this->params['breadcrumbs'][] = $category->name;
 
 		<?php
 		switch ($data->type) {
-			case $data::VALUE_TYPE_REACHTEXT:
-				echo $form->field($data, 'value')->widget(CKEditor::class, [
+			case SiteData::VALUE_TYPE_REACHTEXT:
+				echo $form->field($data, 'value[' . $data->key . ']')->widget(CKEditor::class, [
 					'editorOptions' => ElFinder::ckeditorOptions('elfinder', CKEditorHelper::defaultOptions()),
 				])->label($data->name);
 				break;
-			case $data::VALUE_TYPE_TEXT:
+			case SiteData::VALUE_TYPE_TEXT:
 				echo $form->field($data, 'value[' . $data->key . ']')->textarea(['rows' => 6])->label($data->name);
 				break;
-			case $data::VALUE_TYPE_BOOLEAN:
-				echo $form->field($data, 'value')->dropDownList(['0' => 'Нет', '1' => 'Да'])->label($data->name);
+			case SiteData::VALUE_TYPE_BOOLEAN:
+				echo $form->field($data, 'value[' . $data->key . ']')->dropDownList(['0' => 'Нет', '1' => 'Да'])->label($data->name);
 				break;
-			case $data::VALUE_TYPE_FILE:
-				echo $form->field($data, 'value')->widget(InputFile::class, [
+			case SiteData::VALUE_TYPE_FILE:
+				echo $form->field($data, 'value[' . $data->key . ']')->widget(InputFile::class, [
 					'language'      => 'ru',
 					'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
 					'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
@@ -44,11 +45,11 @@ $this->params['breadcrumbs'][] = $category->name;
 					'multiple'      => false,      // возможность выбора нескольких файлов
 				])->label($data->name);
 				break;
-			case $data::VALUE_TYPE_IMAGE:
-				echo $form->field($data, 'value')->widget(InputImages::class)->label($data->name);
+			case SiteData::VALUE_TYPE_IMAGE:
+				echo $form->field($data, 'value[' . $data->key . ']')->widget(InputImages::class)->label($data->name);
 				break;
 			default:
-				echo $form->field($data, 'value')->textInput(['maxlength' => true])->label($data->name);
+				echo $form->field($data, 'value[' . $data->key . ']')->textInput(['maxlength' => true])->label($data->name);
 		}
 		?>
 
