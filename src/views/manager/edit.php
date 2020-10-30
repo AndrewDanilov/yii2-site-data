@@ -21,28 +21,36 @@ $this->params['breadcrumbs'][] = $category->name;
 
 	<?php foreach ($category->data as $data) { ?>
 
-		<?php if ($data->type == $data::VALUE_TYPE_REACHTEXT) { ?>
-			<?= $form->field($data, 'value')->widget(CKEditor::class, [
-				'editorOptions' => ElFinder::ckeditorOptions('elfinder', CKEditorHelper::defaultOptions()),
-			]) ?>
-		<?php } elseif ($data->type == $data::VALUE_TYPE_TEXT) { ?>
-			<?= $form->field($data, 'value')->textarea(['rows' => 6]) ?>
-		<?php } elseif ($data->type == $data::VALUE_TYPE_BOOLEAN) { ?>
-			<?= $form->field($data, 'value')->dropDownList(['0' => 'Нет', '1' => 'Да']) ?>
-		<?php } elseif ($data->type == $data::VALUE_TYPE_FILE) { ?>
-			<?= $form->field($data, 'value')->widget(InputFile::class, [
-				'language'      => 'ru',
-				'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
-				'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
-				'options'       => ['class' => 'form-control'],
-				'buttonOptions' => ['class' => 'btn btn-default'],
-				'multiple'      => false,      // возможность выбора нескольких файлов
-			]) ?>
-		<?php } elseif ($data->type == $data::VALUE_TYPE_IMAGE) { ?>
-			<?= $form->field($data, 'value')->widget(InputImages::class) ?>
-		<?php } else { ?>
-			<?= $form->field($data, 'value')->textInput(['maxlength' => true]) ?>
-		<?php } ?>
+		<?php
+		switch ($data->type) {
+			case $data::VALUE_TYPE_REACHTEXT:
+				echo $form->field($data, 'value')->widget(CKEditor::class, [
+					'editorOptions' => ElFinder::ckeditorOptions('elfinder', CKEditorHelper::defaultOptions()),
+				])->label($data->name);
+				break;
+			case $data::VALUE_TYPE_TEXT:
+				echo $form->field($data, 'value')->textarea(['rows' => 6])->label($data->name);
+				break;
+			case $data::VALUE_TYPE_BOOLEAN:
+				$form->field($data, 'value')->dropDownList(['0' => 'Нет', '1' => 'Да'])->label($data->name);
+				break;
+			case $data::VALUE_TYPE_FILE:
+				$form->field($data, 'value')->widget(InputFile::class, [
+					'language'      => 'ru',
+					'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
+					'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
+					'options'       => ['class' => 'form-control'],
+					'buttonOptions' => ['class' => 'btn btn-default'],
+					'multiple'      => false,      // возможность выбора нескольких файлов
+				])->label($data->name);
+				break;
+			case $data::VALUE_TYPE_IMAGE:
+				$form->field($data, 'value')->widget(InputImages::class)->label($data->name);
+				break;
+			default:
+				$form->field($data, 'value')->textInput(['maxlength' => true])->label($data->name);
+		}
+		?>
 
 	<?php } ?>
 

@@ -5,14 +5,14 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $categories andrewdanilov\sitedata\models\SiteDataCategory[] */
 
-$this->title = 'Категории настроек';
+$this->title = 'Разделы настроек';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-data-index">
 
     <p>
-        <?= Html::a('Новый параметр', ['/sitedata/data/update'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Разделы настроек', ['/sitedata/category'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Редактировать параметры', ['/sitedata/data'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Редактировать разделы', ['/sitedata/category'], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <div>
