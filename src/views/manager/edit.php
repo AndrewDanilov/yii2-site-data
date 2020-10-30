@@ -25,18 +25,18 @@ $this->params['breadcrumbs'][] = $category->name;
 		<?php
 		switch ($data->type) {
 			case SiteData::VALUE_TYPE_REACHTEXT:
-				echo $form->field($data, 'value[' . $data->key . ']')->widget(CKEditor::class, [
+				echo $form->field($data, '[' . $data->key . ']value')->widget(CKEditor::class, [
 					'editorOptions' => ElFinder::ckeditorOptions('elfinder', CKEditorHelper::defaultOptions()),
 				])->label($data->name);
 				break;
 			case SiteData::VALUE_TYPE_TEXT:
-				echo $form->field($data, 'value[' . $data->key . ']')->textarea(['rows' => 6])->label($data->name);
+				echo $form->field($data, '[' . $data->key . ']value')->textarea(['rows' => 6])->label($data->name);
 				break;
 			case SiteData::VALUE_TYPE_BOOLEAN:
-				echo $form->field($data, 'value[' . $data->key . ']')->dropDownList(['0' => 'Нет', '1' => 'Да'])->label($data->name);
+				echo $form->field($data, '[' . $data->key . ']value')->dropDownList(['0' => 'Нет', '1' => 'Да'])->label($data->name);
 				break;
 			case SiteData::VALUE_TYPE_FILE:
-				echo $form->field($data, 'value[' . $data->key . ']')->widget(InputFile::class, [
+				echo $form->field($data, '[' . $data->key . ']value')->widget(InputFile::class, [
 					'language'      => 'ru',
 					'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
 					'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
@@ -46,10 +46,10 @@ $this->params['breadcrumbs'][] = $category->name;
 				])->label($data->name);
 				break;
 			case SiteData::VALUE_TYPE_IMAGE:
-				echo $form->field($data, 'value[' . $data->key . ']')->widget(InputImages::class)->label($data->name);
+				echo $form->field($data, '[' . $data->key . ']value')->widget(InputImages::class)->label($data->name);
 				break;
 			default:
-				echo $form->field($data, 'value[' . $data->key . ']')->textInput(['maxlength' => true])->label($data->name);
+				echo $form->field($data, '[' . $data->key . ']value')->textInput(['maxlength' => true])->label($data->name);
 		}
 		?>
 
