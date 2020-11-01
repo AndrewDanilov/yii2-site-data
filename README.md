@@ -47,8 +47,8 @@ $config = [
 			'class' => 'andrewdanilov\sitedata\Module',
 			'componentName' => 'siteData', // optional, default is 'siteData'
 			'access' => ['admin'], // access role for module controllers, optional, default is ['@']
-            'uploadBasePath' => '@frontend/web', // optional, default is '@frontend/web'
-            'uploadPath' => 'upload/sitedata', // optional, default is 'upload/sitedata'
+			'uploadBasePath' => '@frontend/web', // optional, default is '@frontend/web'
+			'uploadPath' => 'upload/sitedata', // optional, default is 'upload/sitedata'
 		],
 	],
 ];
