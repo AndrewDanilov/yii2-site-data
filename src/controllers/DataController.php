@@ -41,11 +41,8 @@ class DataController extends BaseController
 		    $model = new SiteData();
 	    }
 
-        if ($model->load(Yii::$app->request->post())) {
-	        $model->prepareValue();
-	        if ($model->save()) {
-		        return $this->redirect(['index']);
-	        }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+		    return $this->redirect(['index']);
         }
 
         return $this->render('update', [

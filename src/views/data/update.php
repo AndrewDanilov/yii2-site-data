@@ -7,10 +7,12 @@ use mihaildev\elfinder\InputFile;
 use andrewdanilov\InputImages\InputImages;
 use andrewdanilov\ckeditor\CKEditor;
 use andrewdanilov\helpers\CKEditorHelper;
+use andrewdanilov\sitedata\models\SiteData;
 use andrewdanilov\sitedata\models\SiteDataCategory;
+use andrewdanilov\behaviors\ValueTypeBehavior;
 
 /* @var $this yii\web\View */
-/* @var $model andrewdanilov\sitedata\models\SiteData */
+/* @var $model SiteData|ValueTypeBehavior */
 
 if ($model->isNewRecord) {
 	$this->title = 'Новый параметр';
@@ -32,28 +34,7 @@ if ($model->isNewRecord) {
 
 	<?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-	<?php if ($model->type == $model::VALUE_TYPE_REACHTEXT) { ?>
-		<?= $form->field($model, 'value')->widget(CKEditor::class, [
-			'editorOptions' => ElFinder::ckeditorOptions('elfinder', CKEditorHelper::defaultOptions()),
-		]) ?>
-	<?php } elseif ($model->type == $model::VALUE_TYPE_TEXT) { ?>
-		<?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
-	<?php } elseif ($model->type == $model::VALUE_TYPE_BOOLEAN) { ?>
-		<?= $form->field($model, 'value')->dropDownList(['0' => 'Нет', '1' => 'Да']) ?>
-	<?php } elseif ($model->type == $model::VALUE_TYPE_FILE) { ?>
-		<?= $form->field($model, 'value')->widget(InputFile::class, [
-			'language'      => 'ru',
-			'controller'    => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
-			'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
-			'options'       => ['class' => 'form-control'],
-			'buttonOptions' => ['class' => 'btn btn-default'],
-			'multiple'      => false,      // возможность выбора нескольких файлов
-		]) ?>
-	<?php } elseif ($model->type == $model::VALUE_TYPE_IMAGE) { ?>
-		<?= $form->field($model, 'value')->widget(InputImages::class) ?>
-	<?php } else { ?>
-		<?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
-	<?php } ?>
+	<?= $model->formField($form, 'value', 'Значение') ?>
 
 	<?= $form->field($model, 'type')->dropDownList($model->getTypeList()) ?>
 

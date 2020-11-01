@@ -1,6 +1,8 @@
 <?php
 namespace andrewdanilov\sitedata\models;
 
+use andrewdanilov\behaviors\ValueTypeBehavior;
+
 /**
  * This is the model class for table "site_data".
  *
@@ -14,14 +16,6 @@ namespace andrewdanilov\sitedata\models;
  */
 class SiteData extends \yii\db\ActiveRecord
 {
-	const VALUE_TYPE_STRING = 'string';
-	const VALUE_TYPE_INTEGER = 'integer';
-	const VALUE_TYPE_BOOLEAN = 'boolean';
-	const VALUE_TYPE_TEXT = 'text';
-	const VALUE_TYPE_REACHTEXT = 'reachtex';
-	const VALUE_TYPE_FILE = 'file';
-	const VALUE_TYPE_IMAGE = 'image';
-
     /**
      * {@inheritdoc}
      */
@@ -30,7 +24,16 @@ class SiteData extends \yii\db\ActiveRecord
         return 'site_data';
     }
 
-    /**
+    public function behaviors()
+    {
+	    return [
+	    	[
+	    		'class' => ValueTypeBehavior::class,
+		    ],
+	    ];
+    }
+
+	/**
      * {@inheritdoc}
      */
     public function rules()
@@ -39,8 +42,8 @@ class SiteData extends \yii\db\ActiveRecord
             [['category_id', 'key', 'type'], 'required'],
             [['category_id'], 'integer'],
             [['type', 'name'], 'string'],
-            [['value'], 'boolean', 'on' => self::VALUE_TYPE_BOOLEAN],
-            [['value'], 'integer', 'on' => self::VALUE_TYPE_INTEGER],
+            [['value'], 'boolean', 'on' => ValueTypeBehavior::VALUE_TYPE_BOOLEAN],
+            [['value'], 'integer', 'on' => ValueTypeBehavior::VALUE_TYPE_INTEGER],
             [['value'], 'string', 'on' => self::SCENARIO_DEFAULT],
             [['key'], 'unique'],
             [['key'], 'string', 'max' => 255],
@@ -69,37 +72,6 @@ class SiteData extends \yii\db\ActiveRecord
 
 	//////////////////////////////////////////////////////////////////
 
-	public static function getTypeList()
-	{
-		return [
-			self::VALUE_TYPE_STRING => 'Строка',
-			self::VALUE_TYPE_INTEGER => 'Целое число',
-			self::VALUE_TYPE_BOOLEAN => 'Двоичное',
-			self::VALUE_TYPE_TEXT => 'Текст',
-			self::VALUE_TYPE_REACHTEXT => 'HTML',
-			self::VALUE_TYPE_FILE => 'Файл',
-			self::VALUE_TYPE_IMAGE => 'Изображение',
-		];
-	}
-
-	/**
-	 * Подготавливает значение параметра в соответствии с его типом,
-	 * а также задает сценарии валидации модели
-	 */
-	public function prepareValue()
-	{
-		if ($this->type == self::VALUE_TYPE_BOOLEAN) {
-			$this->value = (boolean)$this->value;
-			$this->setScenario(self::VALUE_TYPE_BOOLEAN);
-		} elseif ($this->type == self::VALUE_TYPE_INTEGER) {
-			$this->value = (int)$this->value;
-			$this->setScenario(self::VALUE_TYPE_INTEGER);
-		} else {
-			$this->value = (string)$this->value;
-			$this->setScenario(self::SCENARIO_DEFAULT);
-		}
-	}
-
 	/**
 	 * Возвращает значение параметра по его ключу,
 	 * в соответствии с его типом.
@@ -110,16 +82,10 @@ class SiteData extends \yii\db\ActiveRecord
 	 */
 	public static function getValue($key, $defaultValue=null)
 	{
-		$param = self::find()->select(['value', 'type'])->where(['key' => $key])->asArray()->one();
+		/* @var $param SiteData|ValueTypeBehavior */
+		$param = self::find()->select(['value', 'type'])->where(['key' => $key])->one();
 		if ($param) {
-			switch ($param['type']) {
-				case self::VALUE_TYPE_BOOLEAN:
-					return (boolean)$param['value'];
-				case self::VALUE_TYPE_INTEGER:
-					return (int)$param['value'];
-				default:
-					return $param['value'];
-			}
+			return $param->formatValue();
 		} else {
 			return $defaultValue;
 		}
@@ -135,16 +101,7 @@ class SiteData extends \yii\db\ActiveRecord
 	{
 		$param = self::find()->where(['key' => $key])->one();
 		if ($param) {
-			switch ($param->type) {
-				case self::VALUE_TYPE_BOOLEAN:
-					$param->value = (boolean)$value;
-					break;
-				case self::VALUE_TYPE_INTEGER:
-					$param->value = (int)$value;
-					break;
-				default:
-					$param->value = $value;
-			}
+			$param->value = $value;
 			$param->save();
 		}
 	}
@@ -157,6 +114,6 @@ class SiteData extends \yii\db\ActiveRecord
 	 */
 	public static function hasValue($key)
 	{
-		return self::find()->where(['key' => $key])->count() > 0;
+		return self::find()->where(['key' => $key])->exists();
 	}
 }
