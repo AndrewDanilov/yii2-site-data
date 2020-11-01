@@ -7,7 +7,7 @@ use andrewdanilov\sitedata\models\SiteDataCategory;
 /**
  * ManagerController
  */
-class ManagerController extends BackendController
+class ManagerController extends BaseController
 {
 	/**
 	 * @return mixed

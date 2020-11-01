@@ -5,7 +5,7 @@ use andrewdanilov\sitedata\Module;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
-class BackendController extends Controller
+class BaseController extends Controller
 {
 	public $access;
 

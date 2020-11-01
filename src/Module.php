@@ -14,7 +14,7 @@ class Module extends \yii\base\Module
 
 	public function init()
 	{
-		$this->uploadPath = rtrim($this->uploadPath, DIRECTORY_SEPARATOR);
+		$this->uploadPath = trim($this->uploadPath, DIRECTORY_SEPARATOR);
 		Yii::$app->set($this->componentName, [
 			'class' => 'andrewdanilov\sitedata\SiteDataComponent',
 		]);

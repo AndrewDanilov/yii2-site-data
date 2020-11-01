@@ -9,7 +9,7 @@ use andrewdanilov\sitedata\models\SiteDataSearch;
 /**
  * DataController implements the CRUD actions for SiteData model.
  */
-class DataController extends BackendController
+class DataController extends BaseController
 {
     /**
      * Lists all SiteData models.
