@@ -35,7 +35,6 @@ class ManagerController extends BaseController
 		    $hasErrors = false;
 		    foreach ($category->data as $data) {
 			    if ($data->load($post['SiteData'][$data->key], '')) {
-				    $data->prepareValue();
 				    if (!$data->save()) {
 					    $hasErrors = true;
 				    }

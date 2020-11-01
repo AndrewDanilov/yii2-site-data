@@ -4,10 +4,6 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use mihaildev\elfinder\ElFinder;
 use mihaildev\elfinder\InputFile;
-use andrewdanilov\InputImages\InputImages;
-use andrewdanilov\ckeditor\CKEditor;
-use andrewdanilov\helpers\CKEditorHelper;
-use andrewdanilov\sitedata\models\SiteData;
 
 /* @var $this yii\web\View */
 /* @var $category andrewdanilov\sitedata\models\SiteDataCategory */
