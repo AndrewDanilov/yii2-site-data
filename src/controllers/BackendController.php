@@ -1,19 +1,31 @@
 <?php
 namespace andrewdanilov\sitedata\controllers;
 
+use andrewdanilov\sitedata\Module;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 
 class BackendController extends Controller
 {
-	public $access = ['@'];
-	public $user = 'user';
+	public $access;
+
+	public function init()
+	{
+		if (empty($this->access)) {
+			$module = Module::getInstance();
+			if (isset($module->access)) {
+				$this->access = $module->access;
+			} else {
+				$this->access = ['@'];
+			}
+		}
+		parent::init();
+	}
 
 	public function behaviors()
 	{
 		return [
 			'access' => [
-				'user' => $this->user,
 				'class' => AccessControl::class,
 				'rules' => [
 					[
