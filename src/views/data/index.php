@@ -48,10 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
             	'attribute' => 'type',
 	            'value' => function($model) {
-    	            /* @var $model Sitedata|ValueTypeBehavior */
-    	            return ArrayHelper::getValue($model->getTypeList(), $model->type);
+    	            /* @var $model Sitedata */
+    	            return ArrayHelper::getValue(ValueTypeBehavior::getTypeList(), $model->type);
 	            },
-	            'filter' => $searchModel->getTypeList(),
+	            'filter' => ValueTypeBehavior::getTypeList(),
             ],
 
 	        [

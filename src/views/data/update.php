@@ -36,7 +36,7 @@ if ($model->isNewRecord) {
 
 	<?= $model->formField($form, 'value', 'Значение') ?>
 
-	<?= $form->field($model, 'type')->dropDownList($model->getTypeList()) ?>
+	<?= $form->field($model, 'type')->dropDownList(ValueTypeBehavior::getTypeList()) ?>
 
 	<div class="form-group">
 		<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
