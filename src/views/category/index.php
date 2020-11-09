@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-setting-category-index">
 
     <p>
-        <?= Html::a('Новый раздел настроек', ['/sitedata/category/update'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Новый раздел', ['/sitedata/category/update'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Редактировать параметры', ['/sitedata/data'], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?= GridView::widget([
