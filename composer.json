@@ -23,5 +23,8 @@
         "psr-4": {
             "andrewdanilov\\sitedata\\": "src/"
         }
+    },
+    "extra": {
+        "bootstrap": "andrewdanilov\\sitedata\\Bootstrap"
     }
 }
