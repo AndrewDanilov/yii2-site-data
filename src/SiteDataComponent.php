@@ -10,7 +10,7 @@ class SiteDataComponent extends Component
 
 	public function has($key)
 	{
-		if ($this->_settings[$key] === null) {
+		if (!isset($this->_settings[$key])) {
 			return SiteData::hasValue($key);
 		}
 		return true;
@@ -23,7 +23,7 @@ class SiteDataComponent extends Component
 
 	public function get($key, $defaultValue=null)
 	{
-		if ($this->_settings[$key] === null) {
+		if (!isset($this->_settings[$key])) {
 			$this->_settings[$key] = SiteData::getValue($key, $defaultValue);
 		}
 		return $this->_settings[$key];
