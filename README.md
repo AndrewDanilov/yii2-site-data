@@ -34,9 +34,7 @@ Do not forget to run migrations after extension updates too.
 Usage
 -----
 
-_Extension is in testing. Do not use it!_
-
-Configure settings in your `common` config:
+Configure _module_ settings in your `backend` main config:
 
 ```php
 $config = [
@@ -45,7 +43,6 @@ $config = [
 		// ...
 		'sitedata' => [
 			'class' => 'andrewdanilov\sitedata\Module',
-			'componentName' => 'siteData', // optional, default is 'siteData'
 			'access' => ['admin'], // access role for module controllers, optional, default is ['@']
 			'uploadBasePath' => '@frontend/web', // optional, default is '@frontend/web'
 			'uploadPath' => 'upload/sitedata', // optional, default is 'upload/sitedata'
@@ -55,7 +52,37 @@ $config = [
 ```
 
 Here `access` option allows restricting access to defined roles. Options `basePath` and `uploadPath` defines a path where the different type of images or files will be stored.
+Module allows you to create, modify and manage various site settings.
 
+Configure _component_ settings in your `frontend` main config:
+
+```php
+$config = [
+	// ...
+	'components' => [
+		// ...
+		'siteData' => [
+			'class' => 'andrewdanilov\sitedata\components\SiteData',
+		],
+	],
+];
+```
+
+Component generally allows you to get site settings values. You can print them in views or use in contorollers and other places.
+To use needed value in your view, for example, use:
+
+```php
+$this->title = Yii::$app->siteData->get('seo_title', 'Default seo title');
+```
+
+You can also change values. Changes a permanent and stores into a database:
+
+```php
+$this->title = Yii::$app->siteData->set('seo_title', 'New seo title');
+```
+
+The `siteData` is a component name, configured in `component` section above. Second param is optional
+and defines default value if key does not exist.
 
 Backend links to manage site data and categories:
 
@@ -70,12 +97,3 @@ $dataGridUrl = Yii::$app->urlManager->createUrl(['/sitedata/data']);
 // grid for adding/editing/removing data categories
 $categoryGridUrl = Yii::$app->urlManager->createUrl(['/sitedata/category']);
 ```
-
-To display needed value in your view, for example, use:
-
-```php
-$this->title = Yii::$app->siteData->get('seo_title', 'Default seo title');
-```
-
-where `siteData` is a component name, configured in `componentName` property of `sitedata` module. Second param is optional
-and defines default value if key does not exist.

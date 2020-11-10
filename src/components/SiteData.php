@@ -1,17 +1,17 @@
 <?php
-namespace andrewdanilov\sitedata;
+namespace andrewdanilov\sitedata\components;
 
 use yii\base\Component;
-use andrewdanilov\sitedata\models\SiteData;
+use andrewdanilov\sitedata\models\SiteData as SiteDataModel;
 
-class SiteDataComponent extends Component
+class SiteData extends Component
 {
 	public $_settings = [];
 
 	public function has($key)
 	{
 		if (!isset($this->_settings[$key])) {
-			return SiteData::hasValue($key);
+			return SiteDataModel::hasValue($key);
 		}
 		return true;
 	}
@@ -24,14 +24,14 @@ class SiteDataComponent extends Component
 	public function get($key, $defaultValue=null)
 	{
 		if (!isset($this->_settings[$key])) {
-			$this->_settings[$key] = SiteData::getValue($key, $defaultValue);
+			$this->_settings[$key] = SiteDataModel::getValue($key, $defaultValue);
 		}
 		return $this->_settings[$key];
 	}
 
 	public function set($key, $value)
 	{
-		SiteData::setValue($key, $value);
-		return SiteData::getValue($key);
+		SiteDataModel::setValue($key, $value);
+		return SiteDataModel::getValue($key);
 	}
 }
