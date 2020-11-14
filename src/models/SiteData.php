@@ -16,54 +16,52 @@ use andrewdanilov\behaviors\ValueTypeBehavior;
  */
 class SiteData extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'site_data';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function tableName()
+	{
+		return 'site_data';
+	}
 
-    public function behaviors()
-    {
-	    return [
-	    	[
-	    		'class' => ValueTypeBehavior::class,
-		    ],
-	    ];
-    }
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => ValueTypeBehavior::class,
+			],
+		];
+	}
 
 	/**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['category_id', 'key', 'type'], 'required'],
-            [['category_id'], 'integer'],
-            [['type', 'name'], 'string'],
-            [['value'], 'boolean', 'on' => ValueTypeBehavior::VALUE_TYPE_BOOLEAN],
-            [['value'], 'integer', 'on' => ValueTypeBehavior::VALUE_TYPE_INTEGER],
-            [['value'], 'string', 'on' => self::SCENARIO_DEFAULT],
-            [['key'], 'unique'],
-            [['key'], 'string', 'max' => 255],
-        ];
-    }
+	 * {@inheritdoc}
+	 */
+	public function rules()
+	{
+		return [
+			[['category_id', 'key', 'type'], 'required'],
+			[['category_id'], 'integer'],
+			[['type', 'name'], 'string'],
+			[['value'], 'safe'],
+			[['key'], 'unique'],
+			[['key'], 'string', 'max' => 255],
+		];
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'category_id' => 'Раздел',
-            'key' => 'Параметр',
-            'value' => 'Значение',
-            'type' => 'Тип',
-            'name' => 'Название',
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'category_id' => 'Раздел',
+			'key' => 'Параметр',
+			'value' => 'Значение',
+			'type' => 'Тип',
+			'name' => 'Название',
+		];
+	}
 
 	public function getCategory()
 	{
