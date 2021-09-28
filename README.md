@@ -75,14 +75,15 @@ To use needed value in your view, for example, use:
 $this->title = Yii::$app->siteData->get('seo_title', 'Default seo title');
 ```
 
+Second param is optional and defines default value if key does not exist.
+
 You can also change values. Changes a permanent and stores into a database:
 
 ```php
 $this->title = Yii::$app->siteData->set('seo_title', 'New seo title');
 ```
 
-The `siteData` is a component name, configured in `component` section above. Second param is optional
-and defines default value if key does not exist.
+The `siteData` is a component name, configured in `component` section above.
 
 Backend links to manage site data and categories:
 
