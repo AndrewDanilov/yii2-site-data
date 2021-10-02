@@ -98,3 +98,14 @@ $dataGridUrl = Yii::$app->urlManager->createUrl(['/sitedata/data']);
 // grid for adding/editing/removing data categories
 $categoryGridUrl = Yii::$app->urlManager->createUrl(['/sitedata/category']);
 ```
+
+Backend menu items:
+
+```php
+$sitedata_menu_items = [
+    ['label' => 'Site Data'],
+	['label' => 'Site settings', 'url' => ['/sitedata/manager'], 'icon' => 'cog'],
+];
+
+echo \yii\widgets\Menu::widget(['items' => $sitedata_menu_items]);
+```
