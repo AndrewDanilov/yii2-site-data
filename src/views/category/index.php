@@ -12,8 +12,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Настройки сайта', 'u
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-setting-category-index">
-
-    <p>
+    <p style="margin-bottom:30px;">
         <?= Html::a('Новый раздел', ['/sitedata/category/update'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Редактировать параметры', ['/sitedata/data'], ['class' => 'btn btn-warning']) ?>
     </p>

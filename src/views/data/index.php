@@ -16,8 +16,7 @@ $this->title = 'Настройки сайта';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-data-index">
-
-    <p>
+    <p style="margin-bottom:30px;">
         <?= Html::a('Новый параметр', ['/sitedata/data/update'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Редактировать разделы', ['/sitedata/category'], ['class' => 'btn btn-warning']) ?>
     </p>

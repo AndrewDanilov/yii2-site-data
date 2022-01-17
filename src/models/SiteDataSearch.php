@@ -46,7 +46,7 @@ class SiteDataSearch extends SiteData
             'query' => $query,
 	        'sort' => [
 		        'defaultOrder' => [
-			        SiteDataCategory::tableName() . '.order' => SORT_ASC,
+			        'category_order' => SORT_ASC,
 			        SiteData::tableName() . '.order' => SORT_ASC,
 			        'id' => SORT_ASC,
 		        ],
@@ -60,7 +60,7 @@ class SiteDataSearch extends SiteData
 			        'value',
 			        'type',
 			        'name',
-			        SiteDataCategory::tableName() . '.order',
+			        SiteDataCategory::tableName() . '.order as category_order',
 			        SiteData::tableName() . '.order',
 		        ],
 	        ],
