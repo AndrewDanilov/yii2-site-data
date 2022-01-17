@@ -46,6 +46,6 @@ class SiteDataCategory extends \yii\db\ActiveRecord
 
 	public function getData()
 	{
-		return $this->hasMany(SiteData::class, ['category_id' => 'id']);
+		return $this->hasMany(SiteData::class, ['category_id' => 'id'])->orderBy('order');
 	}
 }
