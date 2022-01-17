@@ -13,6 +13,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Настройки сайта', 'u
 $this->params['breadcrumbs'][] = $category->name;
 ?>
 <div class="site-data-edit">
+	<p>
+		<?= Html::a('Редактировать параметры', ['/sitedata/data'], ['class' => 'btn btn-warning']) ?>
+		<?= Html::a('Редактировать разделы', ['/sitedata/category'], ['class' => 'btn btn-warning']) ?>
+	</p>
 
 	<?php $form = ActiveForm::begin(); ?>
 

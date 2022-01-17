@@ -53,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	            },
 	            'filter' => ValueTypeBehavior::getTypeList(),
             ],
+	        'order',
 
 	        [
 		        'class' => 'yii\grid\ActionColumn',

@@ -15,7 +15,7 @@ class SiteDataSearch extends SiteData
     public function rules()
     {
         return [
-            [['id', 'category_id'], 'integer'],
+            [['id', 'category_id', 'order'], 'integer'],
             [['key', 'value', 'name', 'type'], 'safe'],
         ];
     }
@@ -47,6 +47,7 @@ class SiteDataSearch extends SiteData
 	        'sort' => [
 		        'defaultOrder' => [
 			        SiteDataCategory::tableName() . '.order' => SORT_ASC,
+			        SiteData::tableName() . '.order' => SORT_ASC,
 			        'id' => SORT_ASC,
 		        ],
 		        'attributes' => [
@@ -60,6 +61,7 @@ class SiteDataSearch extends SiteData
 			        'type',
 			        'name',
 			        SiteDataCategory::tableName() . '.order',
+			        SiteData::tableName() . '.order',
 		        ],
 	        ],
         ]);
@@ -77,6 +79,7 @@ class SiteDataSearch extends SiteData
 	        SiteData::tableName() . '.id' => $this->id,
 	        SiteData::tableName() . '.category_id' => $this->category_id,
 	        SiteData::tableName() . '.type' => $this->type,
+	        SiteData::tableName() . '.order' => $this->order,
         ]);
 
         $query->andFilterWhere(['like', SiteData::tableName() . '.key', $this->key])

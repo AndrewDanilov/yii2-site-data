@@ -38,6 +38,8 @@ if ($model->isNewRecord) {
 
 	<?= $form->field($model, 'type')->dropDownList(ValueTypeBehavior::getTypeList()) ?>
 
+	<?= $form->field($model, 'order')->textInput() ?>
+
 	<div class="form-group">
 		<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 	</div>

@@ -12,6 +12,7 @@ use andrewdanilov\behaviors\ValueTypeBehavior;
  * @property string $value
  * @property int $type
  * @property string $name
+ * @property int $order
  * @property SiteDataCategory $category
  */
 class SiteData extends \yii\db\ActiveRecord
@@ -40,11 +41,12 @@ class SiteData extends \yii\db\ActiveRecord
 	{
 		return [
 			[['category_id', 'key', 'type'], 'required'],
-			[['category_id'], 'integer'],
+			[['category_id', 'order'], 'integer'],
 			[['type', 'name'], 'string'],
 			[['value'], 'safe'],
 			[['key'], 'unique'],
 			[['key'], 'string', 'max' => 255],
+			[['order'], 'default', 'value' => 0],
 		];
 	}
 
@@ -60,6 +62,7 @@ class SiteData extends \yii\db\ActiveRecord
 			'value' => 'Значение',
 			'type' => 'Тип',
 			'name' => 'Название',
+			'order' => 'Порядок',
 		];
 	}
 
