@@ -2,7 +2,7 @@
 
 use andrewdanilov\behaviors\ValueTypeBehavior;
 use andrewdanilov\sitedata\models\SiteData;
-use andrewdanilov\src\assets\SiteDataAsset;
+use andrewdanilov\sitedata\assets\SiteDataAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 

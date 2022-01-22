@@ -1,11 +1,11 @@
 <?php
-namespace andrewdanilov\src\assets;
+namespace andrewdanilov\sitedata\assets;
 
 use yii\web\AssetBundle;
 
 class SiteDataAsset extends AssetBundle
 {
-	public $sourcePath = '@andrewdanilov/assets/web';
+	public $sourcePath = '@andrewdanilov/sitedata/web';
 	public $css = [
 		'css/sitedata.css',
 	];
