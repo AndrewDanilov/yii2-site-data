@@ -14,7 +14,7 @@ class ManagerController extends BaseController
 	 */
     public function actionIndex()
     {
-    	$categories = SiteDataCategory::find()->orderBy(['order' => SORT_ASC])->all();
+    	$categories = SiteDataCategory::getCategoriesList();
 
 	    return $this->render('index', [
 		    'categories' => $categories,

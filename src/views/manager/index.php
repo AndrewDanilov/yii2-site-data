@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $categories andrewdanilov\sitedata\models\SiteDataCategory[] */
+/* @var $categories string[] categories names indexed by id */
 
 $this->title = 'Разделы настроек';
 $this->params['breadcrumbs'][] = $this->title;
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <div>
-		<?php foreach ($categories as $category) { ?>
-			<p><?= Html::a($category->name, ['/sitedata/manager/edit', 'category_id' => $category->id]) ?></p>
+		<?php foreach ($categories as $category_id => $category_name) { ?>
+			<p><?= Html::a($category_name, ['/sitedata/manager/edit', 'category_id' => $category_id]) ?></p>
 	    <?php } ?>
     </div>
 </div>

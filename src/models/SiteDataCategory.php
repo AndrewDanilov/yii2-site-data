@@ -48,4 +48,9 @@ class SiteDataCategory extends \yii\db\ActiveRecord
 	{
 		return $this->hasMany(SiteData::class, ['category_id' => 'id'])->orderBy('order');
 	}
+
+	public static function getCategoriesList()
+	{
+		return static::find()->select(['name', 'id'])->orderBy('order')->indexBy('id')->column();
+	}
 }

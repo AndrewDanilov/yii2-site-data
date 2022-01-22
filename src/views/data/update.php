@@ -28,7 +28,7 @@ if ($model->isNewRecord) {
 
 	<?php $form = ActiveForm::begin(); ?>
 
-	<?= $form->field($model, 'category_id')->dropDownList(SiteDataCategory::find()->select(['name', 'id'])->orderBy('order')->indexBy('id')->column()) ?>
+	<?= $form->field($model, 'category_id')->dropDownList(SiteDataCategory::getCategoriesList()) ?>
 
 	<?= $form->field($model, 'key')->textInput(['maxlength' => true])->label('Параметр (только латиница)') ?>
 

@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	        [
 		        'attribute' => 'category_id',
 		        'value' => 'category.name',
-		        'filter' => SiteDataCategory::find()->select(['name', 'id'])->indexBy('id')->column(),
+		        'filter' => SiteDataCategory::getCategoriesList(),
 	        ],
             'key',
             'name',

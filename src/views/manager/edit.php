@@ -1,12 +1,15 @@
 <?php
 
+use andrewdanilov\behaviors\ValueTypeBehavior;
+use andrewdanilov\sitedata\models\SiteData;
+use andrewdanilov\src\assets\SiteDataAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use mihaildev\elfinder\ElFinder;
-use mihaildev\elfinder\InputFile;
 
 /* @var $this yii\web\View */
 /* @var $category andrewdanilov\sitedata\models\SiteDataCategory */
+
+SiteDataAsset::register($this);
 
 $this->title = $category->name;
 $this->params['breadcrumbs'][] = ['label' => 'Настройки сайта', 'url' => ['index']];
@@ -22,7 +25,8 @@ $this->params['breadcrumbs'][] = $category->name;
 
 	<?php foreach ($category->data as $data) { ?>
 
-		<?= $data->formField($form, '[' . $data->key . ']value', $data->name) ?>
+		<?php /* @var SiteData|ValueTypeBehavior $data */ ?>
+		<?= $data->formField($form, '[' . $data->key . ']value', $data->name)->hint($data->key) ?>
 
 	<?php } ?>
 
