@@ -16,8 +16,8 @@
         "mihaildev/yii2-elfinder": "*@dev",
         "andrewdanilov/yii2-input-images": "~1.0.2",
         "andrewdanilov/yii2-ckeditor": "~1.0.1",
-        "andrewdanilov/yii2-helpers": "~1.0.12",
-        "andrewdanilov/yii2-behaviors": "~1.0.20"
+        "andrewdanilov/yii2-behaviors": "^1.0",
+        "andrewdanilov/yii2-helpers": "^1.0"
     },
     "autoload": {
         "psr-4": {
